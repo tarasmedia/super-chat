@@ -1,0 +1,12 @@
+<form action="/text/add" method="POST" name="messageForm">
+  <input type="text" name="messageInput" required='required'>
+  <button>send message</button>
+</form>
+
+<div class="chat">
+  {{#each messages}}
+    {{> chat}}
+  {{/each}}
+</div>
+
+<script defer src="/js/bulcik.js"></script>
