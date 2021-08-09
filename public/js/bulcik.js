@@ -3,7 +3,7 @@ const chat = document.querySelector('.chat');
 
 const wsURLProto = window.location.protocol.replace('http', 'ws'); // wss:
 const wsURLAdress = window.location.hostname; // superapp.heroku.com
-const wsURLPort = 3030;
+const wsURLPort = 3099;
 const websocket = new WebSocket(`${wsURLProto}//${wsURLAdress}:${wsURLPort}`);
 console.log(websocket);
 
