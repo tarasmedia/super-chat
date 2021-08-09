@@ -7,8 +7,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const { username } = req.query;
-  res.render('index', { username });
+  // const { username } = req.query;
+  res.redirect('/text/add');
 });
 
 router.get('/allusers', (req, res) => {

@@ -1,7 +1,23 @@
 const express = require('express');
 
 const router = express.Router();
+const WebSocket = require('ws');
 const { Text } = require('../db/models'); // импортируем модель Text
+
+const wss = new WebSocket.Server({ port: process.env.WSPORT });
+
+wss.on('connection', (user) => {
+  user.on('message', async (message) => {
+    const receiveedMessage = JSON.parse(message);
+    // user.send(receiveedMessage.text);
+    // session.user
+    const mess = await Text.create({ message: receiveedMessage.text }); // создаем новое сообщение
+    wss.clients.forEach((client) => {
+      client.send(JSON.stringify({ text: mess.message, id: mess.id }));
+    });
+  });
+  // user.send('server connected');
+});
 
 router.get('/add', async (req, res) => { // ручка добавления поста
   const messages = await Text.findAll(); // находим все старые посты чтобы отобразить на странице
